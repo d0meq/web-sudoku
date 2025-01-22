@@ -1,4 +1,4 @@
-import { random } from "lodash";
+import { shuffle } from "lodash";
 
 export const isSafe = (grid, row, col, num) => {
   for (let x = 0; x < 9; x++) {
@@ -22,7 +22,8 @@ export const solveSudoku = (grid) => {
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
       if (grid[row][col] === 0) {
-        for (let num = 1; num <= 9; num++) {
+        const numbers = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]); // Shuffle numbers
+        for (let num of numbers) {
           if (isSafe(grid, row, col, num)) {
             grid[row][col] = num;
             if (solveSudoku(grid)) {
@@ -47,8 +48,8 @@ export const generateCompleteSudoku = () => {
 export const removeNumbers = (grid, numToRemove) => {
   for (let i = 0; i < numToRemove; i++) {
     while (true) {
-      const row = random(0, 8);
-      const col = random(0, 8);
+      const row = Math.floor(Math.random() * 9);
+      const col = Math.floor(Math.random() * 9);
       if (grid[row][col] !== 0) {
         const backup = grid[row][col];
         grid[row][col] = 0;
