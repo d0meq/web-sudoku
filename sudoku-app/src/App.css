@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.sudoku-grid {
+  display: inline-block;
+  border: 2px solid #000;
+  margin: 20px;
+}
+
+.sudoku-row {
+  display: flex;
+}
+
+.sudoku-cell {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ccc;
+}
+
+.sudoku-cell:focus {
+  outline: none;
+  background-color: #f0f8ff;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
