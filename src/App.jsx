@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SudokuGrid from "./components/SudokuGrid";
 import Controls from "./components/Controls";
-import { generateSudokuPuzzle, solveSudoku } from "./utils/SudokuUtils";
+import { generateSudokuPuzzle, solveSudoku } from "./utils/sudokuUtils";
 import "./App.css";
 
 const App = () => {
