@@ -1,19 +1,41 @@
 import React, { useState } from "react";
 import SudokuGrid from "./components/SudokuGrid";
 import Controls from "./components/Controls";
-import { generateSudokuPuzzle, solveSudoku } from "./utils/sudokuUtils";
+import { generateSudokuPuzzle, solveSudoku } from "./utils/SudokuUtils";
 import "./App.css";
 
 const App = () => {
   const [grid, setGrid] = useState(Array(9).fill(Array(9).fill(0)));
+  const [fixedCells, setFixedCells] = useState(Array(9).fill(Array(9).fill(false))); // Track fixed cells
   const [isSolved, setIsSolved] = useState(false);
   const [message, setMessage] = useState("");
+  const [difficulty, setDifficulty] = useState("medium"); // Default difficulty
 
   const handleGenerate = () => {
-    const puzzle = generateSudokuPuzzle(30); // Generate a puzzle with 30 cells removed
+    let numToRemove;
+    switch (difficulty) {
+      case "easy":
+        numToRemove = 30; // Fewer blanks for easy difficulty
+        break;
+      case "medium":
+        numToRemove = 40; // Moderate blanks for medium difficulty
+        break;
+      case "hard":
+        numToRemove = 50; // More blanks for hard difficulty
+        break;
+      default:
+        numToRemove = 40; // Default to medium
+    }
+
+    const puzzle = generateSudokuPuzzle(numToRemove); // Generate puzzle based on difficulty
     setGrid(puzzle);
+
+    // Mark pre-filled cells as fixed
+    const newFixedCells = puzzle.map((row) => row.map((cell) => cell !== 0));
+    setFixedCells(newFixedCells);
+
     setIsSolved(false);
-    setMessage("New puzzle generated. Good luck!");
+    setMessage(`New ${difficulty} puzzle generated. Good luck!`);
   };
 
   const handleSolve = () => {
@@ -29,15 +51,19 @@ const App = () => {
 
   const handleReset = () => {
     setGrid(Array(9).fill(Array(9).fill(0)));
+    setFixedCells(Array(9).fill(Array(9).fill(false))); // Reset fixed cells
     setIsSolved(false);
     setMessage("Grid reset. Ready for a new puzzle!");
   };
 
   const handleCellChange = (row, col, value) => {
-    const newGrid = JSON.parse(JSON.stringify(grid)); // Deep copy the grid
-    newGrid[row][col] = value === "" ? 0 : parseInt(value, 10);
-    setGrid(newGrid);
-    setMessage(""); // Clear message when user makes changes
+    // Allow changes only if the cell is not fixed
+    if (!fixedCells[row][col]) {
+      const newGrid = JSON.parse(JSON.stringify(grid)); // Deep copy the grid
+      newGrid[row][col] = value === "" ? 0 : parseInt(value, 10);
+      setGrid(newGrid);
+      setMessage(""); // Clear message when user makes changes
+    }
   };
 
   const handleCheckSolution = () => {
@@ -48,6 +74,10 @@ const App = () => {
     } else {
       setMessage("The Sudoku is not solved correctly. Please check your solution.");
     }
+  };
+
+  const handleDifficultyChange = (e) => {
+    setDifficulty(e.target.value); // Update difficulty
   };
 
   // Helper function to check if the Sudoku is solved correctly
@@ -92,7 +122,20 @@ const App = () => {
   return (
     <div className="App">
       <h1>Sudoku Generator and Solver</h1>
-      <SudokuGrid grid={grid} onCellChange={handleCellChange} isSolved={isSolved} />
+      <div className="difficulty-selector">
+        <label htmlFor="difficulty">Select Difficulty: </label>
+        <select id="difficulty" value={difficulty} onChange={handleDifficultyChange}>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <SudokuGrid
+        grid={grid}
+        fixedCells={fixedCells}
+        onCellChange={handleCellChange}
+        isSolved={isSolved}
+      />
       <Controls
         onGenerate={handleGenerate}
         onSolve={handleSolve}

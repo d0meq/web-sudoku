@@ -1,6 +1,6 @@
 import React from "react";
 
-const SudokuGrid = ({ grid, onCellChange, isSolved }) => {
+const SudokuGrid = ({ grid, fixedCells, onCellChange, isSolved }) => {
   return (
     <div className="sudoku-grid">
       {grid.map((row, rowIndex) => (
@@ -13,7 +13,7 @@ const SudokuGrid = ({ grid, onCellChange, isSolved }) => {
               value={cell === 0 ? "" : cell}
               onChange={(e) => onCellChange(rowIndex, colIndex, e.target.value)}
               maxLength="1"
-              disabled={isSolved}
+              disabled={fixedCells[rowIndex][colIndex] || isSolved} // Disable fixed cells and solved grid
             />
           ))}
         </div>

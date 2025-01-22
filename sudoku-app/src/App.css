@@ -1,6 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 .App {
   text-align: center;
   padding: 20px;
+  font-family: 'Ubuntu', serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.difficulty-selector label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.difficulty-selector select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 .sudoku-grid {
@@ -30,6 +51,12 @@
   background-color: #ffcccc; /* Highlight incorrect cells in red */
 }
 
+.sudoku-cell:disabled {
+  background-color: #f0f0f0; /* Light gray background for fixed cells */
+  color: #000; /* Black text for fixed cells */
+  cursor: not-allowed; /* Show not-allowed cursor for fixed cells */
+}
+
 .controls {
   margin-top: 20px;
 }
@@ -46,6 +73,7 @@
   padding: 10px;
   font-size: 18px;
   border-radius: 5px;
+  width: 30%;
 }
 
 .message.success {
