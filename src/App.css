@@ -10,10 +10,10 @@
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
-  gap: 0; /* No gap between cells */
-  border: 2px solid #000; /* Outer border for the grid */
+  gap: 3px; /* No gap between cells */
   max-width: 400px; /* Adjust based on your preference */
   margin: 0 auto; /* Center the grid */
+  padding: 10px;
 }
 
 /* Sudoku cell styles */
@@ -24,22 +24,27 @@
   font-size: 18px;
   border: 1px solid #ccc; /* Default border for all cells */
   box-sizing: border-box;
+  padding-block: 0;
+  padding-inline: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Thicker borders for 3x3 subgrids */
 .sudoku-cell {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 /* Remove top border for the first row */
 .sudoku-cell:nth-child(-n + 9) {
-  border-top: none;
+  border-top: 2px solid black;
+  margin-top: 0;
 }
 
 /* Remove left border for the first column */
 .sudoku-cell:nth-child(9n + 1) {
-  border-left: none;
+  border-left: 2px solid black;
+  margin-left: 0;
 }
 
 /* Add thicker borders for 3x3 subgrids */
@@ -55,12 +60,12 @@
 
 /* Remove right border for the last column */
 .sudoku-cell:nth-child(9n) {
-  border-right: none;
+  border-right: 2px solid black;
 }
 
 /* Remove bottom border for the last row */
 .sudoku-cell:nth-child(n + 73):nth-child(-n + 81) {
-  border-bottom: none;
+  border-bottom: 2px solid black;
 }
 
 /* Optional: Add hover effect */
