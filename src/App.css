@@ -15,14 +15,14 @@
   grid-template-rows: repeat(9, 1fr);
   gap: 0; /* No gap between cells */
   border: 2px solid #000; /* Outer border for the grid */
-  max-width: 400px; /* Adjust based on your preference */
+  max-width: 500px; /* Adjust based on your preference */
   margin: 0 auto; /* Center the grid */
 }
 
 /* Sudoku cell styles */
 .sudoku-cell {
-  width: 40px; /* Adjust cell size */
-  height: 40px; /* Adjust cell size */
+  width: 50px; /* Adjust cell size */
+  height: 50px; /* Adjust cell size */
   text-align: center;
   font-size: 18px;
   border: 1px solid #ccc; /* Default border for all cells */
@@ -80,16 +80,16 @@
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .sudoku-cell {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .sudoku-cell {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     font-size: 12px;
   }
 }
