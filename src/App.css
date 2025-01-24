@@ -1,68 +1,91 @@
-/* Base Styles */
+/* Base styles for the app */
 .App {
   text-align: center;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-/* Difficulty Selector */
-.difficulty-selector {
-  margin-bottom: 20px;
-}
-
-.difficulty-selector label {
-  font-size: 1rem;
-  margin-right: 10px;
-}
-
-.difficulty-selector select {
-  padding: 5px 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-}
-
-/* Sudoku Grid */
+/* Sudoku grid container */
 .sudoku-grid {
-  display: inline-block;
-  border: 2px solid #000;
-  margin: 20px auto;
-  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: 0; /* No gap between cells */
+  border: 2px solid #000; /* Outer border for the grid */
+  max-width: 400px; /* Adjust based on your preference */
+  margin: 0 auto; /* Center the grid */
 }
 
-.sudoku-row {
-  display: flex;
-}
-
+/* Sudoku cell styles */
 .sudoku-cell {
-  width: 40px;
-  height: 40px;
+  width: 40px; /* Adjust cell size */
+  height: 40px; /* Adjust cell size */
   text-align: center;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  font-size: 18px;
+  border: 1px solid #ccc; /* Default border for all cells */
   box-sizing: border-box;
 }
 
-.sudoku-cell:focus {
-  outline: none;
-  background-color: #f0f8ff;
+/* Thicker borders for 3x3 subgrids */
+.sudoku-cell {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
 }
 
-.sudoku-cell.incorrect {
-  background-color: #ffcccc; /* Highlight incorrect cells in red */
+/* Remove top border for the first row */
+.sudoku-cell:nth-child(-n + 9) {
+  border-top: none;
 }
 
-.sudoku-cell:disabled {
-  background-color: #f0f0f0; /* Light gray background for fixed cells */
-  color: #000; /* Black text for fixed cells */
-  cursor: not-allowed; /* Show not-allowed cursor for fixed cells */
+/* Remove left border for the first column */
+.sudoku-cell:nth-child(9n + 1) {
+  border-left: none;
 }
 
-/* Controls */
+/* Add thicker borders for 3x3 subgrids */
+.sudoku-cell:nth-child(3n) {
+  border-right: 2px solid #000; /* Right border for every 3rd cell */
+}
+
+.sudoku-cell:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-cell:nth-child(n + 46):nth-child(-n + 54),
+.sudoku-cell:nth-child(n + 73):nth-child(-n + 81) {
+  border-bottom: 2px solid #000; /* Bottom border for rows 3, 6, and 9 */
+}
+
+/* Remove right border for the last column */
+.sudoku-cell:nth-child(9n) {
+  border-right: none;
+}
+
+/* Remove bottom border for the last row */
+.sudoku-cell:nth-child(n + 73):nth-child(-n + 81) {
+  border-bottom: none;
+}
+
+/* Optional: Add hover effect */
+.sudoku-cell:hover {
+  background-color: #f0f8ff; /* Light blue background on hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .sudoku-cell {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sudoku-cell {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+}
+
+/* Controls styling */
 .controls {
   margin-top: 20px;
   display: flex;
@@ -86,7 +109,23 @@ h1 {
   background-color: #0056b3;
 }
 
-/* Message */
+/* Difficulty selector styling */
+.difficulty-selector {
+  margin-bottom: 20px;
+}
+
+.difficulty-selector label {
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.difficulty-selector select {
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+/* Message styling */
 .message {
   margin-top: 20px;
   padding: 10px;
@@ -105,47 +144,3 @@ h1 {
   color: #721c24;
   border: 1px solid #f5c6cb;
 }
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .sudoku-cell {
-    width: 30px;
-    height: 30px;
-    font-size: 0.9rem;
-  }
-
-  .controls button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  .message {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  .sudoku-cell {
-    width: 25px;
-    height: 25px;
-    font-size: 0.8rem;
-  }
-
-  .controls button {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-
-  .message {
-    font-size: 0.8rem;
-  }
-}
-

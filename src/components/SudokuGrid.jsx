@@ -3,21 +3,19 @@ import React from "react";
 const SudokuGrid = ({ grid, fixedCells, onCellChange, isSolved }) => {
   return (
     <div className="sudoku-grid">
-      {grid.map((row, rowIndex) => (
-        <div key={rowIndex} className="sudoku-row">
-          {row.map((cell, colIndex) => (
-            <input
-              key={colIndex}
-              type="text"
-              className={`sudoku-cell ${isSolved && !isValidCell(grid, rowIndex, colIndex) ? "incorrect" : ""}`}
-              value={cell === 0 ? "" : cell}
-              onChange={(e) => onCellChange(rowIndex, colIndex, e.target.value)}
-              maxLength="1"
-              disabled={fixedCells[rowIndex][colIndex] || isSolved} // Disable fixed cells and solved grid
-            />
-          ))}
-        </div>
-      ))}
+      {grid.map((row, rowIndex) =>
+        row.map((cell, colIndex) => (
+          <input
+            key={`${rowIndex}-${colIndex}`}
+            type="text"
+            className={`sudoku-cell ${isSolved && !isValidCell(grid, rowIndex, colIndex) ? "incorrect" : ""}`}
+            value={cell === 0 ? "" : cell}
+            onChange={(e) => onCellChange(rowIndex, colIndex, e.target.value)}
+            maxLength="1"
+            disabled={fixedCells[rowIndex][colIndex] || isSolved} // Disable fixed cells and solved grid
+          />
+        ))
+      )}
     </div>
   );
 };
