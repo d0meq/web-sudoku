@@ -186,15 +186,15 @@
 }
 
 @media (max-width: 768px) {
-  .number-selector{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+  .number-selector button {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
   }
 
-  .number-selector button {
-    width: 30px;
-    height: 30px;
-    font-size: 10px;
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: repeat(4, 1fr);
   }
 }
