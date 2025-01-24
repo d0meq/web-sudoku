@@ -6,12 +6,13 @@ const SudokuGrid = ({ grid, fixedCells, onCellClick, isSolved }) => {
       {grid.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
           <div
-          key={`${rowIndex}-${colIndex}`}
-          className={`sudoku-cell ${fixedCells[rowIndex][colIndex] ? "generated" : ""} ${
-            isSolved && !isValidCell(grid, rowIndex, colIndex) ? "incorrect" : ""
-          }`}
-          onClick={() => !fixedCells[rowIndex][colIndex] && onCellClick(rowIndex, colIndex)}
-        >
+            key={`${rowIndex}-${colIndex}`}
+            className={`sudoku-cell ${fixedCells[rowIndex][colIndex] ? "generated" : ""} ${
+              isSolved && !isValidCell(grid, rowIndex, colIndex) ? "incorrect" : ""
+            }`}
+            onClick={() => !fixedCells[rowIndex][colIndex] && onCellClick(rowIndex, colIndex)}
+          >
+            {cell === 0 ? "" : cell}
           </div>
         ))
       )}
