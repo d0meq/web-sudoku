@@ -96,7 +96,6 @@
 
 /* Number selector styles */
 .number-selector {
-  
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -184,4 +183,20 @@
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 768px) {
+  .number-selector button {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sudoku-cell {
+    width: 20px;
+    height: 20px;
+    font-size: 7px;
+  }
 }
