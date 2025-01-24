@@ -3,6 +3,9 @@
   text-align: center;
   padding: 20px;
   font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* Sudoku grid container */
@@ -93,9 +96,9 @@
 /* Controls styling */
 .controls {
   margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 10px;
 }
 
