@@ -3,9 +3,6 @@
   text-align: center;
   padding: 20px;
   font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 /* Sudoku grid container */
@@ -13,10 +10,10 @@
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
-  gap: 3px; /* No gap between cells */
+  gap: 0; /* No gap between cells */
+  border: 2px solid #000; /* Outer border for the grid */
   max-width: 400px; /* Adjust based on your preference */
   margin: 0 auto; /* Center the grid */
-  padding: 10px;
 }
 
 /* Sudoku cell styles */
@@ -27,27 +24,28 @@
   font-size: 18px;
   border: 1px solid #ccc; /* Default border for all cells */
   box-sizing: border-box;
-  padding-block: 0;
-  padding-inline: 0;
-  padding: 0;
-  margin: 0;
+  margin: -1px 0 0 -1px; /* Overlap borders to remove gaps */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-/* Thicker borders for 3x3 subgrids */
-.sudoku-cell {
-  border: 1px solid #ccc;
+.sudoku-cell.generated {
+  background-color: #f0f0f0; /* Light gray background */
+  cursor: default; /* Disable pointer interaction */
 }
 
 /* Remove top border for the first row */
 .sudoku-cell:nth-child(-n + 9) {
-  border-top: 2px solid black;
-  margin-top: 0;
+  border-top: none;
+  margin-top: 0; /* Reset margin for the first row */
 }
 
 /* Remove left border for the first column */
 .sudoku-cell:nth-child(9n + 1) {
-  border-left: 2px solid black;
-  margin-left: 0;
+  border-left: none;
+  margin-left: 0; /* Reset margin for the first column */
 }
 
 /* Add thicker borders for 3x3 subgrids */
@@ -63,12 +61,12 @@
 
 /* Remove right border for the last column */
 .sudoku-cell:nth-child(9n) {
-  border-right: 2px solid black;
+  border-right: none;
 }
 
 /* Remove bottom border for the last row */
 .sudoku-cell:nth-child(n + 73):nth-child(-n + 81) {
-  border-bottom: 2px solid black;
+  border-bottom: none;
 }
 
 /* Optional: Add hover effect */
@@ -93,12 +91,42 @@
   }
 }
 
+/* Number selector styles */
+.number-selector {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.number-selector button {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.number-selector button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.number-selector button.selected {
+  background-color: #0056b3;
+  color: white;
+}
+
 /* Controls styling */
 .controls {
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 

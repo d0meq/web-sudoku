@@ -10,6 +10,7 @@ const App = () => {
   const [isSolved, setIsSolved] = useState(false);
   const [message, setMessage] = useState("");
   const [difficulty, setDifficulty] = useState("medium"); // Default difficulty
+  const [selectedNumber, setSelectedNumber] = useState(null); // Track selected number
 
   const handleGenerate = () => {
     let numToRemove;
@@ -56,13 +57,11 @@ const App = () => {
     setMessage("Grid reset. Ready for a new puzzle!");
   };
 
-  const handleCellChange = (row, col, value) => {
-    // Allow changes only if the cell is not fixed
-    if (!fixedCells[row][col]) {
+  const handleCellClick = (row, col) => {
+    if (!fixedCells[row][col] && selectedNumber !== null) {
       const newGrid = JSON.parse(JSON.stringify(grid)); // Deep copy the grid
-      newGrid[row][col] = value === "" ? 0 : parseInt(value, 10);
+      newGrid[row][col] = selectedNumber;
       setGrid(newGrid);
-      setMessage(""); // Clear message when user makes changes
     }
   };
 
@@ -78,6 +77,10 @@ const App = () => {
 
   const handleDifficultyChange = (e) => {
     setDifficulty(e.target.value); // Update difficulty
+  };
+
+  const handleNumberSelect = (number) => {
+    setSelectedNumber(number); // Set the selected number
   };
 
   // Helper function to check if the Sudoku is solved correctly
@@ -133,9 +136,20 @@ const App = () => {
       <SudokuGrid
         grid={grid}
         fixedCells={fixedCells}
-        onCellChange={handleCellChange}
+        onCellClick={handleCellClick}
         isSolved={isSolved}
       />
+      <div className="number-selector">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
+          <button
+            key={number}
+            className={selectedNumber === number ? "selected" : ""}
+            onClick={() => handleNumberSelect(number)}
+          >
+            {number}
+          </button>
+        ))}
+      </div>
       <Controls
         onGenerate={handleGenerate}
         onSolve={handleSolve}
