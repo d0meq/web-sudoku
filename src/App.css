@@ -80,16 +80,16 @@
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .sudoku-cell {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .sudoku-cell {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     font-size: 12px;
   }
 }
@@ -186,17 +186,15 @@
 }
 
 @media (max-width: 768px) {
+  .number-selector{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
   .number-selector button {
     width: 30px;
     height: 30px;
     font-size: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sudoku-cell {
-    width: 20px;
-    height: 20px;
-    font-size: 7px;
   }
 }
