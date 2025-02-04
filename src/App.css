@@ -125,6 +125,11 @@
   color: white;
 }
 
+.number-selector .clear-button::before{
+  width: fit-content;
+  content: "🧽";
+}
+
 /* Controls styling */
 .controls {
   margin-top: 20px;
