@@ -58,9 +58,9 @@ const App = () => {
   };
 
   const handleCellClick = (row, col) => {
-    if (!fixedCells[row][col] && selectedNumber !== null) {
+    if (!fixedCells[row][col]) {
       const newGrid = JSON.parse(JSON.stringify(grid)); // Deep copy the grid
-      newGrid[row][col] = selectedNumber;
+      newGrid[row][col] = selectedNumber !== null ? selectedNumber : 0; // Set to selected number or clear
       setGrid(newGrid);
     }
   };
@@ -149,6 +149,12 @@ const App = () => {
             {number}
           </button>
         ))}
+        <button
+          className={selectedNumber === null ? "selected" : ""}
+          onClick={() => handleNumberSelect(null)}
+        >
+          🧽
+        </button>
       </div>
       <Controls
         onGenerate={handleGenerate}
