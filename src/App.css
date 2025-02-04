@@ -123,6 +123,7 @@
 .number-selector button.selected {
   background-color: #0056b3;
   color: white;
+  text-align: center;
 }
 
 .number-selector .clear-button::before{
